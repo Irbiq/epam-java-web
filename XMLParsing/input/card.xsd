@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.example.com/cards"
+           xmlns="http://www.example.com/cards">
+
+    <xs:element name="OldCards" type="OldCardsType"/>
+    <xs:element name="Card" type="CardType" abstract="true"/>
+    <xs:element name="OrdinaryCard" type="OrdinaryCardType"/>
+    <xs:element name="GreetingCard" type="GreetingCardType"/>
+
+
+    <xs:complexType name="OldCardsType">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element type="OrdinaryCardType" name="OrdinaryCard"/>
+            <xs:element type="GreetingCardType" name="GreetingCard"/>
+            <xs:element type="CardType" name="Card" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="CardType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="theme"/>
+            <xs:element type="historyType" name="history"/>
+            <xs:element name="valuable" minOccurs="0">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="thematic"/>
+                        <xs:enumeration value="historical"/>
+                        <xs:enumeration value="collection"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+        <xs:attribute type="xs:nonNegativeInteger" name="id" use="required"/>
+        <!--<xs:attribute type="xs:string" name="type" use="optional"/>-->
+        <xs:attribute type="xs:string" name="sent" use="optional" default="false"/>
+    </xs:complexType>
+
+
+    <xs:complexType name="OrdinaryCardType">
+        <xs:complexContent>
+            <xs:extension base="CardType">
+
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="GreetingCardType">
+        <xs:complexContent>
+            <xs:extension base="CardType">
+                <xs:sequence>
+                    <xs:element type="xs:string" name="text"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+
+    <xs:complexType name="historyType">
+        <xs:sequence>
+            <xs:element type="xs:string" name="country"/>
+            <xs:element type="xs:nonNegativeInteger" name="year"/>
+            <xs:element type="xs:string" name="author" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+</xs:schema>

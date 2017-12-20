@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OldCards xmlns="http://www.example.com/cards" xsi:schemaLocation="http://www.example.com/cards card.xsd"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <!--You have a CHOICE of the next 3 items at this level-->
+    <OrdinaryCard id="1" sent="false">
+        <theme>Animal</theme>
+        <history>
+            <country>UA</country>
+            <year>1992</year>
+            <!--Optional:-->
+            <author>Rooney</author>
+        </history>
+        <!--Optional:-->
+        <valuable>thematic</valuable>
+    </OrdinaryCard>
+
+    <OrdinaryCard id="2" sent="false">
+        <theme>Car</theme>
+        <history>
+            <country>USA</country>
+            <year>1956</year>
+            <!--Optional:-->
+            <author>Messi</author>
+        </history>
+        <!--Optional:-->
+        <valuable>thematic</valuable>
+    </OrdinaryCard>
+
+    <OrdinaryCard id="3" sent="true">
+        <theme>Toy</theme>
+        <history>
+            <country>BY</country>
+            <year>1992</year>
+            <!--Optional:-->
+            <author>Kasiski</author>
+        </history>
+        <!--Optional:-->
+        <valuable>collection</valuable>
+    </OrdinaryCard>
+
+    <OrdinaryCard id="4" sent="false">
+        <theme>Animal</theme>
+        <history>
+            <country>RU</country>
+            <year>1999</year>
+        </history>
+    </OrdinaryCard>
+
+    <OrdinaryCard id="5" sent="false">
+        <theme>Football</theme>
+        <history>
+            <country>UA</country>
+            <year>1992</year>
+        </history>
+        <!--Optional:-->
+        <valuable>thematic</valuable>
+    </OrdinaryCard>
+
+    <OrdinaryCard id="6" sent="true">
+        <theme>Animal</theme>
+        <history>
+            <country>UA</country>
+            <year>1992</year>
+        </history>
+    </OrdinaryCard>
+
+
+    <OrdinaryCard id="7" sent="true">
+        <theme>Football</theme>
+        <history>
+            <country>UK</country>
+            <year>1732</year>
+        </history>
+        <!--Optional:-->
+        <valuable>collection</valuable>
+    </OrdinaryCard>
+
+
+    <OrdinaryCard id="8" sent="false">
+        <theme>Building</theme>
+        <history>
+            <country>USA</country>
+            <year>1892</year>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+    </OrdinaryCard>
+
+
+    <GreetingCard id="1" sent="false">
+        <theme>Animal</theme>
+        <history>
+            <country>DE</country>
+            <year>1645</year>
+            <!--Optional:-->
+            <author>Ronaldo</author>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+        <text>Congrats</text>
+    </GreetingCard>
+
+    <GreetingCard id="2" sent="false">
+        <theme>Car</theme>
+        <history>
+            <country>FR</country>
+            <year>1973</year>
+        </history>
+        <text>Congrats</text>
+    </GreetingCard>
+
+    <GreetingCard id="3" sent="false">
+        <theme>Football</theme>
+        <history>
+            <country>BY</country>
+            <year>2000</year>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+        <text>WE ARE THE CHAMPS</text>
+    </GreetingCard>
+    <GreetingCard id="4" sent="true">
+        <theme>Fish</theme>
+        <history>
+            <country>UK</country>
+            <year>2006</year>
+            <!--Optional:-->
+            <author>Smith</author>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+        <text>Congrats</text>
+    </GreetingCard>
+
+    <GreetingCard id="5" sent="false">
+        <theme>Football</theme>
+        <history>
+            <country>FR</country>
+            <year>2009</year>
+            <!--Optional:-->
+            <author>Stan</author>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+        <text>Congrats</text>
+    </GreetingCard>
+    <GreetingCard id="6" sent="true">
+        <theme>Building</theme>
+        <history>
+            <country>CND</country>
+            <year>2015</year>
+            <!--Optional:-->
+            <author>Thrump</author>
+        </history>
+        <!--Optional:-->
+        <valuable>historical</valuable>
+        <text>Congrats</text>
+    </GreetingCard>
+    <GreetingCard id="7" sent="true">
+        <theme>Glory</theme>
+        <history>
+            <country>DNM</country>
+            <year>2017</year>
+            <!--Optional:-->
+            <author>Lamar</author>
+        </history>
+        <!--Optional:-->
+        <valuable>collection</valuable>
+        <text>Congrats</text>
+    </GreetingCard>
+    <GreetingCard id="8" sent="false">
+        <theme>Nature</theme>
+        <history>
+            <country>BLG</country>
+            <year>2003</year>
+        </history>
+        <text>Congrats</text>
+    </GreetingCard>
+
+</OldCards>

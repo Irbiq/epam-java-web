@@ -1,0 +1,28 @@
+<OldCards>
+    <!--You have a CHOICE of the next 3 items at this level-->
+    <OrdinaryCard id="1" sent="false">
+        <theme>A</theme>
+        <history>
+            <country>UA</country>
+            <year>1992</year>
+            <!--Optional:-->
+            <author>MESSI</author>
+        </history>
+        <!--Optional:-->
+        <valuable>collection</valuable>
+    </OrdinaryCard>
+
+    <GreetingCard id="1" sent="false">
+        <theme>B</theme>
+        <history>
+            <country>UA</country>
+            <year>1992</year>
+            <!--Optional:-->
+            <author>MESSI</author>
+        </history>
+        <!--Optional:-->
+        <valuable>collection</valuable>
+        <text>aaaaaa</text>
+    </GreetingCard>
+
+</OldCards>
