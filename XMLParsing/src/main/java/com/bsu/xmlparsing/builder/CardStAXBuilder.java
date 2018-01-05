@@ -42,11 +42,11 @@ public class CardStAXBuilder {
                 if (type == XMLStreamConstants.START_ELEMENT) {
                     name = reader.getLocalName();
                     if (CardField.GREETINGCARD.getValue().equals(name)) {
-                        Card flower = buildCard(new GreetingCard(), reader);
-                        cards.add(flower);
+                        Card card = buildCard(new GreetingCard(), reader);
+                        cards.add(card);
                     } else if (CardField.ORDINARYCARD.getValue().equals(name)) {
-                        Card flower = buildCard(new OrdinaryCard(), reader);
-                        cards.add(flower);
+                        Card card = buildCard(new OrdinaryCard(), reader);
+                        cards.add(card);
                     }
                 }
             }
@@ -81,9 +81,6 @@ public class CardStAXBuilder {
                         case GREETINGCARD:
                             card.setId(Integer.parseInt(reader.getAttributeValue(null, CardField.ID.getValue())));
                             break;
-                        /*case ID:
-                            card.setId(SoilType.valueOf(getElementValue(reader).toUpperCase()));
-                            break;*/
                         case SENT:
                             card.setIsSent(Boolean.parseBoolean(reader.getAttributeValue(null, CardField.SENT.getValue())));
                         case THEME:

@@ -101,7 +101,6 @@ public class CardSaxHandler extends DefaultHandler {
                     break;
                 default:
                     throw new SAXException("No such tag exception");
-
             }
         }
     }
