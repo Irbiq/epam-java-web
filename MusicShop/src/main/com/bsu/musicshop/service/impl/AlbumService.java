@@ -17,8 +17,19 @@ public class AlbumService implements IAlbumService {
     }
 
     @Override
-    public Album getAlbumById(int albumId){
+    public Album getAlbumById(int albumId) {
         return albumDAO.getAlbumById(albumId);
+    }
+
+    @Override
+    public void addAlbum(String title, String imageUrl, int artistId) {
+        albumDAO.addAlbum(title, imageUrl, artistId);
+
+    }
+
+    @Override
+    public void deleteAlbum(int albumId) {
+        albumDAO.deleteAlbum(albumId);
     }
 
 }

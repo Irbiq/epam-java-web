@@ -14,51 +14,13 @@ public class UserDAO implements IUserDAO {
 
     private final static Logger logger = LogManager.getLogger(UserDAO.class);
 
-    private static String insertUserQuery = "INSERT INTO  music_store.user (name,surname,login,password) VALUES (?,?,?,?)";
-    private static String deleteUserQuery = "DELETE FROM  music_store.user WHERE id = ?";
-    private static String findUserQuery = "SELECT * FROM music_store.user WHERE id = ? ";
-    private static String updateUserQuery = "UPDATE music_store.user SET name =? WHERE id = ? ";
-    private static String loginUserQuery = "SELECT * FROM music_store.user WHERE name = ? and password = ? ";
-
     private static final String COUNT_USERS_BY_LOGIN_QUERY = "SELECT COUNT(*) FROM music_store.user WHERE login = ?";
     private static final String FIND_USER_BY_LOGIN_AND_PASSWORD_QUERY = "SELECT * FROM music_store.user WHERE login = ? and password = ?";
     private static final String SELECT_ALL_USERS_QUERY = "SELECT * FROM music_store.user";
     private static final String DELETE_USER_BY_ID_QUERY = "DELETE FROM music_store.user WHERE iduser = ?";
-    private static final String UPDATE_USER_QUERY = "UPDATE music_store.user ";
+    private static final String UPDATE_USER_QUERY = "UPDATE music_store.user  set name = ?  ";
     private static final String INSERT_USER_QUERY = "insert into music_store.user (login,password,name,surname,role) values(?,?,?,?,?)";
 
-
-    @Override
-    public User findUser(int id) {
-        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(findUserQuery);
-            statement.setInt(1, id);
-            ResultSet rs = statement.executeQuery();
-            User user = new User();
-            while (rs.next()) {
-                String name = rs.getString(2);
-                user.setId(id);
-                user.setName(name);
-            }
-            return user;
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-        }
-        return null;
-    }
-
-    @Override
-    public boolean updateUser(User user) {
-        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(updateUserQuery);
-            statement.setString(1, user.getName());
-            statement.setInt(2, user.getId());
-            return (statement.executeUpdate() != 0);
-        } catch (SQLException e) {
-            logger.error(e.getMessage());
-        }
-        return false;
-    }
 
     @Override
     public List<User> getAllUsers() {

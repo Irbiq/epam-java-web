@@ -22,5 +22,20 @@ public class AudioService implements IAudioService {
         return audioDAO.getAudiosByAlbum(albumId);
     }
 
+    @Override
+    public void deleteAudio(int audioId) {
+        audioDAO.deleteAudio(audioId);
+    }
+
+    @Override
+    public void addAudio(String title, double price, double discount, String imageUrl, int albumId, int artistId) {
+        audioDAO.addAudio(title,price,discount,imageUrl,albumId,artistId);
+    }
+
+    @Override
+    public Audio getAudioById(int audioId) {
+        return audioDAO.getAudioById(audioId);
+    }
+
 
 }

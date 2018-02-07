@@ -9,4 +9,9 @@ public interface IAlbumService {
     List<Album> getAlbums();
 
     Album getAlbumById(int albumId);
+
+    void addAlbum(String title, String imageUrl, int artistId);
+
+    void deleteAlbum(int albumId);
+
 }

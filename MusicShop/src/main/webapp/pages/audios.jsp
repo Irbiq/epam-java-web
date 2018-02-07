@@ -26,30 +26,39 @@
 <div class="container-fluid" style="width: 80%">
     <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
         <c:set scope="page" var="i" value="1"></c:set>
-        <c:forEach var="singleItem" items="${audios}" begin="1" end="4" varStatus="status">
+        <c:forEach var="singleItem" items="${audios}" begin="1" end="${(audios_amount/4)+4}" varStatus="status">
             <li style="margin-top: 1%">
-                <div class="card-deck mh-50">
-                    <c:forEach var="audio" items="${audios}" begin="${i}" end="${i+4}" varStatus="status">
-                        <div class="card" style="width: 5rem; ">
-                            <img class="card-img-top" src="/images/IMG1afb4-371cf.jpg" alt="Card image cap">
-                            <div class="card-block" style="margin-left: 10px">
-                                <h4 class="card-title" style="font-weight: bold; margin-bottom:1px ;margin-top: 3px">
-                                    Artist</h4>
-                                <h6 class="card-text" style="margin-top: 4px">Song title</h6>
-                            </div>
-                            <div class="card-block" style="margin-top: 5px ; text-align: right">
-                                <div>
-                                        <%--<form name="price-form" action="/controller?command=get_album&id=${audio.id}" method="get">--%>
-                                    <span style="text-align: right; margin-right: 10px"> <a href="/controller?command=add_to_cart&id=${audio.id}" class="card-link">3.99$</a></span>
-                                        <%--</form>--%>
+                <div class="row text-center" style="width: 80%; margin-left: 10%">
+                    <c:forEach var="audio" items="${audios}" begin="${i}" end="${i+3}" varStatus="status">
+                        <div class="col">
+                            <div class="card" style="width: 20rem;">
+                                <img class="card-img-top" src="/images/covers/${audio.imageUrl}" alt="Card image cap">
+                                <div class="card-block" style="margin-left: 10px">
+                                    <h4 class="card-title"
+                                        style="font-weight: bold; margin-bottom:1px ;margin-top: 3px">${audio.artist}</h4>
+                                    <h6 class="card-text" style="margin-top: 4px">${audio.title}</h6>
+                                </div>
+                                <div class="card-block" style="margin-top: 5px ; text-align: right">
+                                    <div>
+                                        <form name="price-form" style="margin-bottom: 1rem"
+                                              action="/controller?command=add_to_cart" method="get">
+                                            <input type="hidden" name="comment-album-id" value="${album.id}"/>
+                                            <button type="submit" class="btn btn-link">${audio.price}</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </c:forEach>
                 </div>
+                <c:set var="i" value="${i+4}"/>
             </li>
         </c:forEach>
     </ul>
+    <form action="/pages/admin/add_audio.jsp" method="get">
+        <button type="submit" class="btn btn-primary">Add Audio</button>
+    </form>
+
 </div>
 </div>
 </body>

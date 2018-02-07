@@ -22,14 +22,15 @@
 
     <link href="../css/ctable.css" rel="stylesheet">
 </head>
+<jsp:useBean id="album" scope="request" type="main.com.bsu.musicshop.entity.Album"/>
 <body>
 <jsp:include page="navbar.jsp"/>
-<div class="container rounded"  style=" border:1px solid #cecece; margin-top: 1%;">
-    <div class="row" >
-        <div class="col-4">
-            <img src="/images/IMG1afb4-371cf.jpg" width="200 px" height="200px">
+<div class="container rounded" style=" border:1px solid #cecece; margin-top: 1%; padding: 0%">
+    <div class="row" style="margin: 0%">
+        <div class="col-3" style="padding: 0%">
+            <img src="/images/covers/${album.imageUrl}" width="200 px" height="200px">
         </div>
-        <div class="col-8">
+        <div class="col-9">
             <div class="row cst-text"
                  style="color:rgb(247, 255, 251);  font-size: 20px; font-weight: 300;line-height: 35px;margin-bottom: 1px;white-space: normal">
                 ${album.artist}
@@ -39,28 +40,62 @@
             </div>
         </div>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Artist</th>
-            <th scope="col">Track</th>
-            <th scope="col">Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${audios}" var="audio" varStatus="index" >
-        <tr>
-            <th>${index.index+1}</th>
-            <td>${audio.artist}</td>
-            <td>${audio.title}</td>
-            <td>
-                <button class="btn btn-primary">${audio.price}</button>
-            </td>
-        </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <div>
+        <table class="table" style="margin: 0%">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Artist</th>
+                <th scope="col">Track</th>
+                <th scope="col">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${audios}" var="audio" varStatus="index">
+                <tr>
+                    <th>${index.index+1}</th>
+                    <td>${audio.artist}</td>
+                    <td>${audio.title}</td>
+                    <td>
+                        <button class="btn btn-primary">${audio.price}</button>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="background: rgba(25,21,8,0.7);margin-left: 1em ; padding-top: 2%">
+        <h4 style="color: rgb(247, 255, 251); border-bottom: solid  rgb(247, 255, 251);">Comments</h4>
+        <div class="row" style="margin: 0%">
+            <form class="form-inline" method="post" action="/controller?command=add_comment">
+                <div  style="padding: 0%; border-bottom: solid #007bff;">
+                    <textarea name="comment-text" id="textarea"
+                              style="border-bottom: solid rgba(22,25,23,0.7) ; height: 35px; color: rgb(247, 255, 251); background-color: #222222; border: none;"
+                              class="style-scope iron-autogrow-textarea" cols="100" autocomplete="off" required=""
+                              maxlength="10000"></textarea>
+                    <input type="hidden" name="comment-album-id" value="${album.id}"/>
+                </div>
+                <div >
+                    <button class="btn btn-primary" type="submit" style="height: 35px; width: 60px">send</button>
+                </div>
+            </form>
+        </div>
+        <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
+            <c:set scope="page" var="i" value="1"/>
+            <c:forEach var="singleItem" items="${albums}" begin="1" end="4" varStatus="status">
+                <li style="margin-top: 1%">
+
+                    <div class="row" style="margin: 0%">
+                        <strong style="color: rgb(247, 255, 251);">Author</strong>
+                    </div>
+                    <div class="row" style="margin: 0%">
+                        <p style="color: rgb(247, 255, 251);">TEXTTEXTTEXT</p>
+                    </div>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

@@ -20,12 +20,16 @@ public class UserService implements IUserService {
     public boolean addUser(User user) {
         System.out.println("In service" + userDAO.isLoginFree(user.getLogin()));
         if (userDAO.isLoginFree(user.getLogin())) {
-            System.out.println("In service" +" "+ user.getLogin());
             userDAO.addUser(user);
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public void deleteUser(int userId){
+        userDAO.deleteUser(userId);
     }
 
     @Override

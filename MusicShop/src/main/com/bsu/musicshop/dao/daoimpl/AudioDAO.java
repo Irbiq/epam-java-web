@@ -29,10 +29,27 @@ public class AudioDAO implements IAudioDAO {
             "  INNER JOIN album alb\n" +
             "    ON aud.album_idalbum = alb.idalbum;\n";
 
+    private static final String SELECT_AUDIO_BY_ID =
+            "SELECT\n" +
+            "  aud.idaudio,\n" +
+            "  aud.title,\n" +
+            "  aud.price,\n" +
+            "  aud.discount,\n" +
+            "  aud.image_url,\n" +
+            "  art.name  AS artist,\n" +
+            "  alb.title AS album\n" +
+            "FROM audio aud\n" +
+            "  INNER JOIN artist art\n" +
+            "    ON aud.artist_idartist = art.idartist\n" +
+            "  INNER JOIN album alb\n" +
+            "    ON aud.album_idalbum = alb.idalbum" +
+            "WHERE aud.idaudio = ?;\n";
+
     private static final String SELECT_AUDIOS_BY_ALBUM = "select * from audio\n" +
             "where  album_idalbum = ?;";
 
-    private static final String INSERT_AUDIO = "INSERT INTO music_store.audio " +
+    private static final String INSERT_AUDIO =
+            "INSERT INTO music_store.audio " +
             "(title, price, discount, image_url, album_idalbum, artist_idartist) values (?,?,?,?,?,?);";
 
     private static final String DELETE_AUDIO = "delete  from audio where  idaudio = ?;";
@@ -68,6 +85,20 @@ public class AudioDAO implements IAudioDAO {
 
 
     @Override
+    public Audio getAudioById(int id) {
+        Audio audio = null;
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(SELECT_AUDIO_BY_ID);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            audio = getAudiosFromResultSet(rs).get(0);
+        } catch (SQLException e) {
+            logger.error("Error. Impossible to load audios : ", e);
+        }
+        return audio;
+    }
+
+    @Override
     public List<Audio> getAudiosByAlbum(int id) {
         List<Audio> audios = null;
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
@@ -81,6 +112,7 @@ public class AudioDAO implements IAudioDAO {
         }
         return audios;
     }
+
 
     @Override
     public List<Audio> getAudios() {
@@ -113,16 +145,5 @@ public class AudioDAO implements IAudioDAO {
             audios.add(audio);
         }
         return audios;
-    }
-}
-
-
-class Test22 {
-
-
-    public static void main(String[] args) {
-        IAudioDAO iAudioDAO = new AudioDAO();
-        iAudioDAO.getAudios().forEach(System.out::println);
-
     }
 }

@@ -50,7 +50,6 @@
             <fmt:message key="page.audios"/>
         </h1>
     </div>
-
     <div id="audio" class="carousel slide" data-ride="carousel" data-interval="false">
         <ol class="carousel-indicators">
             <%-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -59,7 +58,7 @@
         </ol>
         <div class="carousel-inner">
             <c:set var="t" scope="page" value="${1}"/>
-            <c:forEach var="i" begin="1" end="4"><%--${audios.size/5}--%>
+            <c:forEach var="i" begin="1" end="${(audios_amount/5)}"><%--${audios.size/5}--%>
             <c:choose>
             <c:when test="${t==1}">
             <div class="carousel-item active">
@@ -72,7 +71,8 @@
                         <c:forEach items="${audios}" var="audio" begin="${t}" end="${t+4}" varStatus="status">
                             <div class="col">
                                 <div class="card" style="width: 20rem">
-                                    <img class="card-img-top" src="/images/shopping-cart-128.png" alt="Card image cap">
+                                    <img class="card-img-top" src="/images/covers/${audio.imageUrl}"
+                                         alt="Card image cap">
                                     <div class="card-block" style="margin-left: 10px">
                                         <h4 class="card-title"
                                             style="font-weight: bold; margin-bottom:1px ;margin-top: 3px">
@@ -115,13 +115,10 @@
 
     <div id="album" class="carousel slide" data-ride="carousel" data-interval="false">
         <ol class="carousel-indicators">
-            <%-- <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li> //ПЕРЕДЕЛАТЬ
-             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--%>
         </ol>
         <div class="carousel-inner">
             <c:set var="t" scope="page" value="${1}"/>
-            <c:forEach var="i" begin="1" end="4"><%--${audios.size/5}--%>
+            <c:forEach var="i" begin="1" end="${(albums_amount/5)+1}"><%--${audios.size/5}--%>
             <c:choose>
             <c:when test="${t==1}">
             <div class="carousel-item active">
@@ -134,17 +131,22 @@
                         <c:forEach items="${albums}" var="album" begin="${t}" end="${t+4}" varStatus="status">
                             <div class="col">
                                 <div class="card" style="width: 20rem">
-                                    <img class="card-img-top" src="/images/shopping-cart-128.png" alt="Card image cap">
+                                    <img class="card-img-top" src="/images/covers/${album.imageUrl}"
+                                         alt="Card image cap">
                                     <div class="card-block" style="margin-left: 10px">
-                                        <h4 class="card-title" style="font-weight: bold; margin-bottom:1px ;margin-top: 3px">
+                                        <h4 class="card-title"
+                                            style="font-weight: bold; margin-bottom:1px ;margin-top: 3px">
                                                 ${album.artist}
                                         </h4>
                                         <h6 class="card-text" style="margin-top: 4px">${album.title}</h6>
                                     </div>
                                     <div class="card-block" style="margin-top: 5px ; text-align: right">
                                         <div>
-                                            <form name="price-form" action="/controller?command=get_album&id=${album.id}" method="post">
-                                <span style="text-align: right; margin-right: 10px"> <a href="/controller?command=get_album&id=${album.id}" class="card-link">${audio.price} $</a></span>
+                                            <form name="price-form"
+                                                  action="/controller?command=get_album&id=${album.id}" method="post">
+                                                <span style="text-align: right; margin-right: 10px"> <a
+                                                        href="/controller?command=get_album&id=${album.id}"
+                                                        class="card-link">To Album</a></span>
                                             </form>
                                         </div>
                                     </div>

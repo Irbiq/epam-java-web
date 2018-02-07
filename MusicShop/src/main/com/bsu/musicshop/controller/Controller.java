@@ -36,7 +36,9 @@ public class Controller extends HttpServlet {
         String commandName = req.getParameter("command");
         AbstractCommand command = CommandFactory.valueOf(commandName.toUpperCase()).createCommand();
         String page = command.execute(req,resp);
-        getServletContext().getRequestDispatcher(page).forward(req, resp);
+        if(page != null) {
+            getServletContext().getRequestDispatcher(page).forward(req, resp);
+        }
 
     }
 }

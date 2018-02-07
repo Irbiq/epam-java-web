@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Artist {
-
-    int id;
-    String name;
+    private int id;
+    private String name;
 }

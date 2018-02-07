@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Comment {
 
     private int id;
-    private int userId;
-    private int audioId;
+    private int albumId;
+    private String user;
     private String text;
 }

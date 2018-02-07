@@ -14,18 +14,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlbumDAO implements IAlbumDAO {
-
     private final static Logger logger = LogManager.getLogger(AlbumDAO.class);
 
-
-    private final static String SELECT_ALBUMS = "SELECT DISTINCT alb.idalbum,alb.title,alb.image_url,art.name\n" +
+    private final static String SELECT_ALBUMS =
+            "SELECT DISTINCT alb.idalbum,alb.title,alb.image_url,art.name\n" +
             "FROM album alb\n" +
             "  INNER JOIN audio aud\n" +
             "    ON alb.idalbum = aud.album_idalbum\n" +
             "  INNER JOIN artist art ON aud.artist_idartist = art.idartist;";
 
-    private final static String SELECT_ALBUM_BY_ID = "SELECT alb.idalbum,alb.title,alb.image_url,art.name FROM album alb " +
+    private final static String SELECT_ALBUM_BY_ID =
+            "SELECT alb.idalbum,alb.title,alb.image_url,art.name FROM album alb " +
             "INNER JOIN artist art on alb.artist_idartist = art.idartist WHERE alb.idalbum = ?";
+
+    private static final String INSERT_ALBUM = "INSERT INTO album (title,image_url,artist_idartist) values(?,?,?)";
+
+    private static final String DELETE_ALBUM = "DELETE FROM album WHERE idalbum=?";
+
+    @Override
+    public void addAlbum(String title, String imageUrl, int artistId) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(INSERT_ALBUM);
+            ps.setString(1, title);
+            ps.setString(2, imageUrl);
+            ps.setInt(3, artistId);
+            int result = ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("Error. Impossible to load albums : " + e);
+        }
+    }
+
+    @Override
+    public void deleteAlbum(int albumId) {
+        Album album = null;
+        try (Connection connection = ConnectionPool.getInstance().getConnection()) {
+            PreparedStatement ps = connection.prepareStatement(DELETE_ALBUM);
+            ps.setInt(1, albumId);
+            int result = ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.error("Error. Impossible to load albums : " + e);
+        }
+    }
 
     @Override
     public Album getAlbumById(int id) {
@@ -70,6 +99,4 @@ public class AlbumDAO implements IAlbumDAO {
         }
         return albums;
     }
-
-
 }

@@ -8,8 +8,6 @@ import java.util.List;
 public interface IUserDAO {
     void addUser(User user);
     boolean deleteUser(int id);
-    User findUser(int id);
-    boolean updateUser(User user);
     List<User> getAllUsers();
     User findUserByLoginAndPassword(String login, String password);
     boolean isLoginFree(String login);

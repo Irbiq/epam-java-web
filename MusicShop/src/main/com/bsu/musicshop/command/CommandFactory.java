@@ -2,10 +2,7 @@
 package main.com.bsu.musicshop.command;
 
 
-import main.com.bsu.musicshop.command.impl.GetAlbumCommand;
-import main.com.bsu.musicshop.command.impl.LoginCommand;
-import main.com.bsu.musicshop.command.impl.LogoutCommand;
-import main.com.bsu.musicshop.command.impl.RegistrationCommand;
+import main.com.bsu.musicshop.command.impl.*;
 
 public enum CommandFactory {
     LOGIN {
@@ -28,9 +25,19 @@ public enum CommandFactory {
             return new GetAlbumCommand();
         }
     },
+    ADD_COMMENT {
+        public AbstractCommand createCommand() {
+            return new AddCommentCommand();
+        }
+    },
     TO_ALBUMS {
         public AbstractCommand createCommand() {
             return new GetAlbumCommand();
+        }
+    },
+    LOCALE{
+        public AbstractCommand createCommand() {
+            return new LocaleCommand();
         }
     };
 

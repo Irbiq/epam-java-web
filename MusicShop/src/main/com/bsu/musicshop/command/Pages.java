@@ -9,6 +9,6 @@ public interface Pages {
     String SONGS = "/pages/audios.jsp";
     String ALBUM = "/pages/album.jsp";
     String ALBUMS = "/pages/albums.jsp";
-    String CART = "cart";
-
+    String CART = "/pages/cart.jsp";
+    String USERS ="/pages/admin/users.jsp" ;
 }
