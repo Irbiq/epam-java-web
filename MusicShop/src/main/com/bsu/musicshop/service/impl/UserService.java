@@ -3,7 +3,10 @@ package main.com.bsu.musicshop.service.impl;
 import main.com.bsu.musicshop.dao.IUserDAO;
 import main.com.bsu.musicshop.dao.daoimpl.UserDAO;
 import main.com.bsu.musicshop.entity.User;
+import main.com.bsu.musicshop.exception.ServiceException;
 import main.com.bsu.musicshop.service.IUserService;
+import main.com.bsu.musicshop.util.DataValidator;
+import main.com.bsu.musicshop.util.Roles;
 
 import java.util.List;
 
@@ -17,13 +20,19 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(User user) throws ServiceException {
         System.out.println("In service" + userDAO.isLoginFree(user.getLogin()));
-        if (userDAO.isLoginFree(user.getLogin())) {
-            userDAO.addUser(user);
-            return true;
-        } else {
-            return false;
+
+        if(DataValidator.isLoginCorrect(user.getLogin()) && DataValidator.isPasswordCorrect(user.getPassword())) {
+            if (userDAO.isLoginFree(user.getLogin())) {
+                user.setRole(Roles.USER.toString());
+                userDAO.addUser(user);
+                return true;
+            } else {
+                throw new ServiceException("Login is used");
+            }
+        }else {
+            throw new ServiceException("Incorrect login or password");
         }
     }
 

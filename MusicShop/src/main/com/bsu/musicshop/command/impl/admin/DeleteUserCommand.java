@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DeleteUserCommand extends AbstractCommand {
 
-    IUserService userService = new UserService();
+    private IUserService userService = new UserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-        int id  = Integer.parseInt(request.getParameter("user-id"));
+        int id  = Integer.parseInt(request.getParameter("user-delete-id"));
         userService.deleteUser(id);
         return Pages.USERS;
-
     }
 }

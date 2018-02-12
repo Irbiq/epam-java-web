@@ -11,16 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class DeleteFromCart extends AbstractCommand {
+public class DeleteFromCartCommand extends AbstractCommand {
 
     ICartService cartService = new CartService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-
         int audioId = Integer.parseInt(request.getParameter("audio-delete-id"));
         ((List<Audio>)request.getSession().getAttribute(Attributes.CART_LIST)).removeIf(audio -> audio.getId()==audioId);
-
         return Pages.CART;
     }
 }

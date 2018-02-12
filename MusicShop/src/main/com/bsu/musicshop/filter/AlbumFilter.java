@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 
-@WebFilter(filterName = "AudioFilter", urlPatterns = {"/pages/albums.jsp"}, dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
+@WebFilter(filterName = "AlbumFilter", urlPatterns = {"/pages/albums.jsp"}, dispatcherTypes = {DispatcherType.FORWARD, DispatcherType.REQUEST})
 public class AlbumFilter implements Filter {
 
     @Override

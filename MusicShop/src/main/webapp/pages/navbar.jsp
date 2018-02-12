@@ -39,10 +39,12 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <div class="btn btn-outline-info my-2 my-sm-0">
-                        <img src="/images/shopping-cart-512.png" width="18" height="18">
-                        <span class="badge badge-default badge-pill">${cart_list.size()}</span>
-                    </div>
+                    <%--<div class="btn btn-outline-info my-2 my-sm-0">--%>
+                        <a  class="nav-link btn btn-outline-info my-2 my-sm-0" href="/pages/cart.jsp">
+                            <img src="/images/shopping-cart-512.png" width="18" height="12">
+                            <span class="badge badge-default badge-pill">${cart_list.size()}</span>
+                        </a>
+                    <%--</div>--%>
                 </li>
                 <c:if test="${user==null}">
                     <li class="nav-item active">

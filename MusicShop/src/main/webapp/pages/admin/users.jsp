@@ -4,7 +4,7 @@
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<fmt:setLocale value="ru_RU" scope="session"/> <%--${visitor.locale}--%>
+<fmt:setLocale value="ru_RU" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <html>
 <head>
@@ -34,35 +34,35 @@
         <tr>
             <th>#</th>
             <th>id</th>
-            <th>login</th>
-            <th>password</th>
-            <th>name</th>
-            <th>surname</th>
-            <th>role</th>
-            <th>edit</th>
-            <th>delete</th>
+            <th><fmt:message key="page.login"/></th>
+            <th><fmt:message key="page.password"/></th>
+            <th><fmt:message key="page.name"/></th>
+            <th><fmt:message key="page.surname"/></th>
+            <th><fmt:message key="page.role"/></th>
+            <th><fmt:message key="page.edit"/></th>
+            <th><fmt:message key="page.delete"/></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="user" items="${users}" varStatus="index">
             <tr>
                 <td>${index.index+1}</td>
-                <td><c:out value="${user.id}"></c:out></td>
-                <td><c:out value="${user.login}"></c:out></td>
-                <td><c:out value="${user.password}"></c:out></td>
-                <td><c:out value="${user.name}"></c:out></td>
-                <td><c:out value="${user.surname}"></c:out></td>
-                <td><c:out value="${user.role}"></c:out></td>
+                <td><c:out value="${user.id}"/></td>
+                <td><c:out value="${user.login}"/></td>
+                <td><c:out value="${user.password}"/></td>
+                <td><c:out value="${user.name}"/></td>
+                <td><c:out value="${user.surname}"/></td>
+                <td><c:out value="${user.role}"/></td>
                 <td>
                     <form method="POST" action="/controller?command=user_edit">
-                        <input type="hidden" name="prof-delete-id" value="${ user.id }"/>
-                        <input type="submit" value="edit" class="btn btn-primary btn-xs"/>
+                        <input type="hidden" name="user-edit-id" value="${ user.id }"/>
+                        <input type="submit" value="<fmt:message key="page.edit"/>" class="btn btn-primary btn-xs"/>
                     </form>
                 </td>
                 <td>
                     <form method="POST" action="/controller?command=user_delete">
-                        <input type="hidden" name="prof-delete-id" value="${ user.id }"/>
-                        <input type="submit" value="delete" class="btn btn-danger btn-xs"/>
+                        <input type="hidden" name="user-delete-id" value="${ user.id }"/>
+                        <input type="submit" value="<fmt:message key="page.delete"/>" class="btn btn-danger btn-xs"/>
                     </form>
                 </td>
             </tr>

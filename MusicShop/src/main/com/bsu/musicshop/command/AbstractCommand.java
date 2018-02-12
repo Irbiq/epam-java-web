@@ -1,5 +1,7 @@
 package main.com.bsu.musicshop.command;
 
+import main.com.bsu.musicshop.exception.ServiceException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

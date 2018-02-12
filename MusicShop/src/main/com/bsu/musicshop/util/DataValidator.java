@@ -7,12 +7,12 @@ public class DataValidator {
     private DataValidator() {
     }
 
-    public static boolean validateLogin(String login) {
+    public static boolean isLoginCorrect(String login) {
         return login.matches(LOGIN_REGEX);
     }
 
 
-    public static boolean validatePassword(String password) {
+    public static boolean isPasswordCorrect(String password) {
         return password.matches(PASSWORD_REGEX);
     }
 

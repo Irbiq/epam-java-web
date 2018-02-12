@@ -1,4 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:setLocale value="${locale}" scope="session"/>
+<fmt:setBundle basename="properties.content"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -35,22 +38,22 @@
                     <div class="panel-body">
                         <form name="loginForm" action="/controller?command=registration" method="post">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label><fmt:message key="page.name"/></label>
                                 <input type="text" class="form-control" name="user-name" id="user-name-id"
                                        placeholder="User Name" required="required">
                             </div>
                             <div class="form-group">
-                                <label>Surname</label>
+                                <label><fmt:message key="page.surname"/></label>
                                 <input type="text" class="form-control" name="user-surname" id="user-surname-id"
                                        placeholder="User Name" required="required">
                             </div>
                             <div class="form-group">
-                                <label>Login</label>
+                                <label><fmt:message key="page.login"/></label>
                                 <input type="text" class="form-control" name="user-login" id="user-login-id"
                                        placeholder="User Name" required="required">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label><fmt:message key="page.password"/></label>
                                 <input type="password" class="form-control" name="user-password" id="user-password-id"
                                        placeholder="Password" required="required">
                             </div>
@@ -62,7 +65,7 @@
                                 </select>
                             </div>--%>
                             <button type="submit" style="width: 100%;"
-                                    class="btn btn-large btn-primary btn-lg btn-block"><b>Register</b></button>
+                                    class="btn btn-large btn-primary btn-lg btn-block"><b><fmt:message key="page.registration"/></b></button>
                         </form>
                     </div>
                 </div>

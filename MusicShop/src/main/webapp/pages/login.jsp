@@ -1,5 +1,8 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<fmt:setLocale value="${locale}" scope="session"/>
+<fmt:setBundle basename="properties.content"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,17 +41,17 @@
                     <div class="panel-body">
                         <form name="loginForm" action="/controller?command=login" method="post">
                             <div class="form-group">
-                                <label>Login</label> <input
+                                <label><fmt:message key="page.login"/></label> <input
                                     type="text" class="form-control" name="user-login" id="user-name-id"
                                     placeholder="User Name" required="required">
                             </div>
                             <div class="form-group">
-                                <label>Password</label> <input
+                                <label><fmt:message key="page.password"/></label> <input
                                     type="password" class="form-control" name="user-password" id="user-password-id"
                                     placeholder="Password" required="required">
                             </div>
                             <button type="submit" style="width: 100%;"
-                                    class="btn btn-large btn btn-success btn-lg btn-block"><b>Login</b></button>
+                                    class="btn btn-large btn btn-success btn-lg btn-block"><b><fmt:message key="page.enter"/></b></button>
                         </form>
                     </div>
                 </div>

@@ -20,6 +20,6 @@ public class AudioCommand extends AbstractCommand {
 
         List<Audio> audios = songService.getAudios();
         request.getSession().setAttribute("audios",audios);
-        return Pages.SONGS;
+        return Pages.AUDIOS;
     }
 }

@@ -17,15 +17,13 @@ public class AlbumDAO implements IAlbumDAO {
     private final static Logger logger = LogManager.getLogger(AlbumDAO.class);
 
     private final static String SELECT_ALBUMS =
-            "SELECT DISTINCT alb.idalbum,alb.title,alb.image_url,art.name\n" +
-            "FROM album alb\n" +
-            "  INNER JOIN audio aud\n" +
-            "    ON alb.idalbum = aud.album_idalbum\n" +
-            "  INNER JOIN artist art ON aud.artist_idartist = art.idartist;";
+            "SELECT alb.idalbum,alb.title,alb.image_url,art.name \n" +
+                    "FROM album alb \n" +
+                    "INNER JOIN artist art ON alb.artist_idartist = art.idartist;";
 
     private final static String SELECT_ALBUM_BY_ID =
             "SELECT alb.idalbum,alb.title,alb.image_url,art.name FROM album alb " +
-            "INNER JOIN artist art on alb.artist_idartist = art.idartist WHERE alb.idalbum = ?";
+                    "INNER JOIN artist art on alb.artist_idartist = art.idartist WHERE alb.idalbum = ?";
 
     private static final String INSERT_ALBUM = "INSERT INTO album (title,image_url,artist_idartist) values(?,?,?)";
 

@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddCommentCommand extends AbstractCommand {
 
+    private final String currentPage = "/controller?command=get_album&id=";
 
-    ICommentService commentService = new CommentService();
+    private ICommentService commentService = new CommentService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -22,6 +23,6 @@ public class AddCommentCommand extends AbstractCommand {
         String text = request.getParameter("comment-text");
         System.out.println(userId +" "+ albumId + text);
         int result  = commentService.addComment(text,userId,albumId);
-        return "/controller?command=get_album&id="+albumId;
+        return currentPage+albumId;
     }
 }

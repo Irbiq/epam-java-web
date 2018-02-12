@@ -15,7 +15,8 @@ public class AudioDAO implements IAudioDAO {
 
     private final static Logger logger = LogManager.getLogger(AudioDAO.class);
 
-    private static final String SELECT_AUDIOS = "SELECT\n" +
+    private static final String SELECT_AUDIOS =
+            "SELECT\n" +
             "  aud.idaudio,\n" +
             "  aud.title,\n" +
             "  aud.price,\n" +
@@ -26,7 +27,7 @@ public class AudioDAO implements IAudioDAO {
             "FROM audio aud\n" +
             "  INNER JOIN artist art\n" +
             "    ON aud.artist_idartist = art.idartist\n" +
-            "  INNER JOIN album alb\n" +
+            "  LEFT OUTER JOIN album alb\n" +
             "    ON aud.album_idalbum = alb.idalbum;\n";
 
     private static final String SELECT_AUDIO_BY_ID =
@@ -41,7 +42,7 @@ public class AudioDAO implements IAudioDAO {
             "FROM audio aud\n" +
             "  INNER JOIN artist art\n" +
             "    ON aud.artist_idartist = art.idartist\n" +
-            "  INNER JOIN album alb\n" +
+            "  LEFT OUTER JOIN album alb\n" +
             "    ON aud.album_idalbum = alb.idalbum" +
             "WHERE aud.idaudio = ?;\n";
 
@@ -52,13 +53,13 @@ public class AudioDAO implements IAudioDAO {
             "INSERT INTO music_store.audio " +
             "(title, price, discount, image_url, album_idalbum, artist_idartist) values (?,?,?,?,?,?);";
 
-    private static final String DELETE_AUDIO = "delete  from audio where  idaudio = ?;";
+    private static final String DELETE_AUDIO = "DELETE FROM audio WHERE  idaudio = ?;";
 
 
     @Override
     public void deleteAudio(int audioId) {
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
-            PreparedStatement ps = connection.prepareStatement(INSERT_AUDIO);
+            PreparedStatement ps = connection.prepareStatement(DELETE_AUDIO);
             ps.setInt(1, audioId);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -75,8 +76,12 @@ public class AudioDAO implements IAudioDAO {
             ps.setDouble(2, price);
             ps.setDouble(3, discount);
             ps.setString(4, image_url);
-            ps.setInt(5, albumId);
-            ps.setInt(5, artistId);
+            if(albumId==0){
+                ps.setNull(5,Types.INTEGER);
+            }else {
+                ps.setInt(5, albumId);
+            }
+            ps.setInt(6, artistId);
             ps.executeUpdate();
         } catch (SQLException e) {
             logger.error("Error. Impossible to insert audios : ", e);

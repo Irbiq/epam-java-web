@@ -31,12 +31,6 @@ public class UsersFilter implements Filter {
         List<User> users = userService.getAllUsers();
         request.getSession().setAttribute(Attributes.USERS, users);
 
-
-        System.out.println("IN USERS FILTER");
-        users.forEach(System.out::println);
-        //}else {
-        //    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        //}
         filterChain.doFilter(servletRequest, servletResponse);
 
     }

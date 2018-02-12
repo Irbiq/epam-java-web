@@ -4,7 +4,6 @@ public class Attributes {
 
     public static final String ALBUMS = "albums";
     public static final String AUDIOS = "audios";
-
     public static final String ALL_ALBUMS = "all_albums";
     public static final String ALL_AUDIOS = "all_audios";
     public static final String ALBUM_AUDIOS = "album_audios";
@@ -21,4 +20,5 @@ public class Attributes {
     public static final String ARTISTS = "artists";
     public static final String LOCALE = "locale";
     public static final String CART_LIST = "cart_list";
+    public static final String COMMENTS = "comments_to_album";
 }

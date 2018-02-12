@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="error.jsp"%>
+<fmt:setLocale value="${locale}" scope="session"/>
+<fmt:setBundle basename="properties.content"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -45,9 +49,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Artist</th>
-                <th scope="col">Track</th>
-                <th scope="col">Price</th>
+                <th scope="col"><fmt:message key="page.artist"/></th>
+                <th scope="col"><fmt:message key="page.audio"/></th>
+                <th scope="col"><fmt:message key="page.price"/></th>
             </tr>
             </thead>
             <tbody>
@@ -66,7 +70,7 @@
     </div>
 
     <div style="background: rgba(25,21,8,0.7);margin-left: 1em ; padding-top: 2%">
-        <h4 style="color: rgb(247, 255, 251); border-bottom: solid  rgb(247, 255, 251);">Comments</h4>
+        <h4 style="color: rgb(247, 255, 251); border-bottom: solid  rgb(247, 255, 251);"><fmt:message key="page.comments"/></h4>
         <div class="row" style="margin: 0%">
             <form class="form-inline" method="post" action="/controller?command=add_comment">
                 <div  style="padding: 0%; border-bottom: solid #007bff;">
@@ -77,20 +81,19 @@
                     <input type="hidden" name="comment-album-id" value="${album.id}"/>
                 </div>
                 <div >
-                    <button class="btn btn-primary" type="submit" style="height: 35px; width: 60px">send</button>
+                    <button class="btn btn-primary" type="submit" style="height: 35px; width: 60px"><fmt:message key="page.send"/></button>
                 </div>
             </form>
         </div>
         <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
             <c:set scope="page" var="i" value="1"/>
-            <c:forEach var="singleItem" items="${albums}" begin="1" end="4" varStatus="status">
+            <c:forEach var="comment" items="${comments_to_album}"  varStatus="status">
                 <li style="margin-top: 1%">
-
                     <div class="row" style="margin: 0%">
-                        <strong style="color: rgb(247, 255, 251);">Author</strong>
+                        <strong style="color: rgb(247, 255, 251);">${comment.user}</strong>
                     </div>
                     <div class="row" style="margin: 0%">
-                        <p style="color: rgb(247, 255, 251);">TEXTTEXTTEXT</p>
+                        <p style="color: rgb(247, 255, 251);">${comment.text}</p>
                     </div>
                 </li>
             </c:forEach>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginCommand extends AbstractCommand {
 
-    IUserService userService = new UserService();
+    private IUserService userService = new UserService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

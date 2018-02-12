@@ -3,8 +3,8 @@
          pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<fmt:setLocale value="ru_RU" scope="session"/> <%--${visitor.locale}--%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,10 +57,10 @@
              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--%>
         </ol>
         <div class="carousel-inner">
-            <c:set var="t" scope="page" value="${1}"/>
-            <c:forEach var="i" begin="1" end="${(audios_amount/5)}"><%--${audios.size/5}--%>
+            <c:set var="t" scope="page" value="${0}"/>
+            <c:forEach var="i" begin="0" end="${(sessionScope.audios.size())/5}"><%--${audios.size/5}--%>
             <c:choose>
-            <c:when test="${t==1}">
+            <c:when test="${t==0}">
             <div class="carousel-item active">
                 </c:when>
                 <c:otherwise>
@@ -82,10 +82,12 @@
                                     </div>
                                     <div class="card-block" style="margin-top: 5px ; text-align: right">
                                         <div>
-                                            <form name="price-form" action="/controller?command=register" method="post">
-                                                <span style="text-align: right; margin-right: 10px">
-                                                    <a href="#" class="card-link">${audio.price} $</a>
+                                            <form id="audio-to-cart" name="price-form" action="/controller?command=add_to_cart" method="post">
+                                                <span style="text-align: right; margin-right: 10px"><%--
+                                                    <a href="#" class="card-link">${audio.price} $</a>--%>
+                                                    <input name="audio-buy-id" type="hidden" value="${audio.id}">
                                                 </span>
+                                                <button class="btn btn-link" type="submit" form="audio-to-cart">${audio.price} $</button>
                                             </form>
                                         </div>
                                     </div>
@@ -117,10 +119,10 @@
         <ol class="carousel-indicators">
         </ol>
         <div class="carousel-inner">
-            <c:set var="t" scope="page" value="${1}"/>
-            <c:forEach var="i" begin="1" end="${(albums_amount/5)+1}"><%--${audios.size/5}--%>
+            <c:set var="t" scope="page" value="${0}"/>
+            <c:forEach var="i" begin="0" end="${(sessionScope.albums.size())/5-1}"><%--${audios.size/5}--%>
             <c:choose>
-            <c:when test="${t==1}">
+            <c:when test="${t==0}">
             <div class="carousel-item active">
                 </c:when>
                 <c:otherwise>

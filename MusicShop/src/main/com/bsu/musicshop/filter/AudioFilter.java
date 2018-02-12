@@ -28,13 +28,11 @@ public class AudioFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         /*if (((HttpServletRequest) servletRequest).getMethod().equals("GET"))*/
-
         IAudioService audioService = new AudioService();
         List<Audio> audios = audioService.getAudios();
         request.getSession().setAttribute(Attributes.AUDIOS, audios);
         request.getSession().setAttribute(Attributes.AUDIOS_AMOUNT, audios.size());
-
-        /*logger.info(request.getSession().getAttribute(Attributes.AUDIOS));*/
+        audios.forEach(System.out::println);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

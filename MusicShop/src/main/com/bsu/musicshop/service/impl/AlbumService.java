@@ -23,8 +23,15 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public void addAlbum(String title, String imageUrl, int artistId) {
-        albumDAO.addAlbum(title, imageUrl, artistId);
 
+        if (title.isEmpty()){
+            return;
+        }
+
+        if(imageUrl.isEmpty()){
+            imageUrl = "default-cover.png";
+        }
+        albumDAO.addAlbum(title, imageUrl, artistId);
     }
 
     @Override

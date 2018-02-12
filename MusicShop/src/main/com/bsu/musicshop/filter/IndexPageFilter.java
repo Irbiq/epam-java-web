@@ -1,10 +1,13 @@
 package main.com.bsu.musicshop.filter;
 
 import main.com.bsu.musicshop.entity.Album;
+import main.com.bsu.musicshop.entity.Artist;
 import main.com.bsu.musicshop.entity.Audio;
 import main.com.bsu.musicshop.service.IAlbumService;
+import main.com.bsu.musicshop.service.IArtistService;
 import main.com.bsu.musicshop.service.IAudioService;
 import main.com.bsu.musicshop.service.impl.AlbumService;
+import main.com.bsu.musicshop.service.impl.ArtistService;
 import main.com.bsu.musicshop.service.impl.AudioService;
 import main.com.bsu.musicshop.util.Attributes;
 
@@ -13,6 +16,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,27 +26,34 @@ public class IndexPageFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        IAudioService audioService = new AudioService();
-        IAlbumService albumService = new AlbumService();
         if (request.getSession().getAttribute(Attributes.AUDIOS) == null) {
+            IAudioService audioService = new AudioService();
             List<Audio> audios = audioService.getAudios();
             request.getSession().setAttribute(Attributes.AUDIOS_AMOUNT, audios.size());
             request.getSession().setAttribute(Attributes.AUDIOS, audios);
         }
         if (request.getSession().getAttribute(Attributes.ALBUMS) == null) {
+            IAlbumService albumService = new AlbumService();
             List<Album> albums = albumService.getAlbums();
             request.getSession().setAttribute(Attributes.ALBUMS_AMOUNT, albums.size());
             request.getSession().setAttribute(Attributes.ALBUMS, albums);
         }
-        if(request.getSession().getAttribute(Attributes.LOCALE) == null){
+        if (request.getSession().getAttribute(Attributes.LOCALE) == null) {
             Locale locale = request.getLocale();
             request.getSession().setAttribute(Attributes.LOCALE, locale);
-            System.out.println(locale);
         }
-
+        if (request.getSession().getAttribute(Attributes.ARTISTS) == null) {
+            IArtistService artistService = new ArtistService();
+            List<Artist> artists = artistService.getAllArtists();
+            request.getSession().setAttribute(Attributes.ARTISTS, artists);
+        }
+        if (request.getSession().getAttribute(Attributes.CART_LIST) == null) {
+            request.getSession().setAttribute(Attributes.CART_LIST, new ArrayList<Audio>());
+        }
         System.out.println("In filter");
         filterChain.doFilter(servletRequest, servletResponse);
     }
