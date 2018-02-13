@@ -4,6 +4,7 @@ import main.com.bsu.musicshop.dao.IArtistDAO;
 import main.com.bsu.musicshop.dbmanager.ConnectionPool;
 import main.com.bsu.musicshop.entity.Artist;
 import main.com.bsu.musicshop.entity.Artist;
+import main.com.bsu.musicshop.exception.DAOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,7 +22,7 @@ public class ArtistDAO implements IArtistDAO {
     private static final String SELECT_ARTISTS = "SELECT * FROM ARTIST";
     
     @Override
-    public List<Artist> getAllArtists() {
+    public List<Artist> getAllArtists() throws DAOException {
 
         List<Artist> artists = null;
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
@@ -37,7 +38,8 @@ public class ArtistDAO implements IArtistDAO {
                 artists.add(artist);
             }
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load Artists : " + e);
+            logger.error("Error. Impossible to load artists : " + e);
+            throw new DAOException("Error. Impossible to load Artists : " + e,e);
         }
         return artists;
     }

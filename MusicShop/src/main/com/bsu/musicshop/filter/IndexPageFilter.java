@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,9 +53,8 @@ public class IndexPageFilter implements Filter {
             request.getSession().setAttribute(Attributes.ARTISTS, artists);
         }
         if (request.getSession().getAttribute(Attributes.CART_LIST) == null) {
-            request.getSession().setAttribute(Attributes.CART_LIST, new ArrayList<Audio>());
+            request.getSession().setAttribute(Attributes.CART_LIST, new HashSet<Audio>());
         }
-        System.out.println("In filter");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

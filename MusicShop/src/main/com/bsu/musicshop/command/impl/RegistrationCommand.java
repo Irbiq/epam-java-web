@@ -37,11 +37,13 @@ public class RegistrationCommand extends AbstractCommand {
         System.out.println("IN REGISTRATION");
         System.out.println(isAdded);
         System.out.println(user);
+        user = userService.findByLoginAndPassword(user.getLogin(),user.getPassword());
+        System.out.println(user);
         if (isAdded) {
             request.getSession().setAttribute("user", user);
             return Pages.HOME;
         } else {
-            return Pages.REGISTARTION;
+            return Pages.REGISTRATION;
         }
     }
 }

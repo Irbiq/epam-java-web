@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page errorPage="error.jsp" language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -23,11 +23,16 @@
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
 
-    <link href="../../css/ctable.css" rel="stylesheet">
+    <link href="../css/ctable.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
-<div class="container-fluid" >
+<div class="container-fluid text-center">
+    <form method="post" action="/controller?command=buy_all">
+        <button type="submit" type="button" class="btn btn-primary">
+            <fmt:message key="page.price"/> : ${total_price}
+    </form>
+    </button>
     <table class="table">
         <thead class="thead-inverse">
         <tr>
@@ -57,6 +62,7 @@
         </c:forEach>
         </tbody>
     </table>
+
 </div>
 </body>
 </html>

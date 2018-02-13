@@ -32,7 +32,6 @@ public class AudioFilter implements Filter {
         List<Audio> audios = audioService.getAudios();
         request.getSession().setAttribute(Attributes.AUDIOS, audios);
         request.getSession().setAttribute(Attributes.AUDIOS_AMOUNT, audios.size());
-        audios.forEach(System.out::println);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

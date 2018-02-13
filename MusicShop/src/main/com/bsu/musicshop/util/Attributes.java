@@ -21,4 +21,6 @@ public class Attributes {
     public static final String LOCALE = "locale";
     public static final String CART_LIST = "cart_list";
     public static final String COMMENTS = "comments_to_album";
+    public static final String TOTAL_PRICE = "total_price" ;
+    public static final String EDITED_USER = "edited_user" ;
 }

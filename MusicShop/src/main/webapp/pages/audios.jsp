@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="error.jsp" isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <html>
@@ -26,19 +26,22 @@
 </head>
 <body style="background-color: #222222">
 <jsp:include page="navbar.jsp"></jsp:include>
+
 <div class="container-fluid text-center" style="width: 80%">
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAudio"
-            data-whatever="@mdo"><fmt:message key="page.add_song"/>
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAudioToAlbum"
-            data-whatever="@mdo"><fmt:message key="page.add_to_album"/>
-    </button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteAudio"
-            data-whatever="@fat"><fmt:message key="page.delete"/>
-    </button>
+    <c:if test="${user.role == \"ADMIN\" }">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAudio"
+                data-whatever="@mdo"><fmt:message key="page.add_song"/>
+        </button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAudioToAlbum"
+                data-whatever="@mdo"><fmt:message key="page.add_to_album"/>
+        </button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteAudio"
+                data-whatever="@fat"><fmt:message key="page.delete"/>
+        </button>
+    </c:if>
 
     <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
-        <c:set scope="page" var="i" value="0"></c:set>
+        <c:set scope="page" var="i" value="0"/>
         <c:forEach var="singleItem" items="${audios}" varStatus="status">
             <li style="margin-top: 1%">
                 <div class="row text-center" style="width: 80%; margin-left: 10%">
@@ -53,15 +56,15 @@
                                 </div>
                                 <div class="card-block" style="margin-top: 5px ; text-align: right">
                                     <div>
-                                        <form id="audio-to-cart" name="price-form"
-                                              action="/controller?command=add_to_cart" method="post">
-                                                <span style="text-align: right; margin-right: 10px">
-                                                    <input name="audio-buy-id" type="hidden" value="${audio.id}">
-                                                </span>
-                                            <button class="btn btn-link" type="submit"
-                                                    form="audio-to-cart">${audio.price}$
-                                            </button>
-                                        </form>
+                                        <div>
+                                            <form name="price-form"
+                                                  action="/controller?command=add_to_cart" method="post">
+                                                    <%--<input name="album-id" type="hidden" value="${album.id}">--%>
+                                                <input name="audio-buy" type="hidden" value="${audio.id}">
+                                                <button class="btn btn-link" type="submit">${audio.price}$
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +91,8 @@
                         <div class="form-group">
                             <label for="audio-title-id" class="form-control-label"><fmt:message
                                     key="page.title"/></label>
-                            <input required type="text" name="audio-title" class="form-control" id="audio-title-id">
+                            <input required="required" type="text" name="audio-title" class="form-control"
+                                   id="audio-title-id">
                         </div>
                         <div class="form-group">
                             <label for="audio-artist-id" class="form-control-label"><fmt:message
@@ -108,7 +112,8 @@
                         <div class="form-group">
                             <label for="audio-price-id" class="form-control-label"><fmt:message
                                     key="page.price"/></label>
-                            <input type="text" name="audio-price" class="form-control" id="audio-price-id">
+                            <input type="text" required="required" name="audio-price" class="form-control"
+                                   id="audio-price-id">
                         </div>
 
                         <div class="form-group">
@@ -122,7 +127,7 @@
                     <button type="reset" class="btn btn-secondary" data-dismiss="modal"><fmt:message
                             key="page.cancel"/></button>
                     <%--id="submit-id" --%>
-                    <button form="add-audio-id" type="submit" class="btn btn-primary"><fmt:message key="page.ok"/>
+                    <button form="add-audio-id" id="" type="submit" class="btn btn-primary"><fmt:message key="page.ok"/>
                     </button>
                 </div>
             </div>
@@ -135,7 +140,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAudioToAlbumLabel">New message</h5>
+                    <h5 class="modal-title" id="addAudioToAlbumLabel"><fmt:message
+                            key="page.add_to_album"/></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -145,7 +151,7 @@
                         <div class="form-group">
                             <label for="audio-title-id" class="form-control-label"><fmt:message
                                     key="page.title"/></label>
-                            <input required type="text" name="audio-title" class="form-control"
+                            <input required="required" type="text" name="audio-title" class="form-control"
                                    id="audio-to-album-title-id">
                         </div>
                         <div class="form-group">
@@ -166,7 +172,8 @@
                         <div class="form-group">
                             <label for="audio-alb-price-id" class="form-control-label"><fmt:message
                                     key="page.price"/></label>
-                            <input type="text" name="audio-price" class="form-control" id="audio-alb-price-id">
+                            <input type="text" required="required" name="audio-price" class="form-control"
+                                   id="audio-alb-price-id">
                         </div>
 
                         <div class="form-group">
@@ -193,7 +200,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteAudioLabel">New message</h5>
+                    <h5 class="modal-title" id="deleteAudioLabel"><fmt:message
+                            key="page.delete_audio"/></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -232,17 +240,15 @@
         $("#delete-audio-form-id")[0].reset();
         return false;
     });
-    $('#add-album-btn-id').click(function () {
+    $('#add-audio-btn-id').click(function () {
         console.log("CLICKED");
-        $('#addAlbum').modal('hide');
+        $('#addAudio').modal('hide');
         if ($("#audio-title-id") != null || $("#audio-title-id") != "") {
-            $("#add-album-form-id")[0].submit();
+            $("#add-audio-id")[0].submit();
         }
         $("#add-album-form-id")[0].reset();
         return false;
     });
 </script>
-
-
 </body>
 </html>

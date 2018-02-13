@@ -8,7 +8,11 @@ import java.util.List;
 public interface IUserService {
 
     List<User> getAllUsers();
+
+    void updateUser(User user);
+
     boolean addUser(User user) throws ServiceException;
     void deleteUser(int userId);
     User findByLoginAndPassword(String name, String password);
+    User findById(int id);
 }

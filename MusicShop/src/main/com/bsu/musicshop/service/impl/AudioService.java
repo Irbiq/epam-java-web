@@ -3,6 +3,7 @@ package main.com.bsu.musicshop.service.impl;
 import main.com.bsu.musicshop.dao.IAudioDAO;
 import main.com.bsu.musicshop.dao.daoimpl.AudioDAO;
 import main.com.bsu.musicshop.entity.Audio;
+import main.com.bsu.musicshop.exception.DAOException;
 import main.com.bsu.musicshop.exception.ServiceException;
 import main.com.bsu.musicshop.service.IAudioService;
 
@@ -15,18 +16,31 @@ public class AudioService implements IAudioService {
 
     @Override
     public List<Audio> getAudios() {
-        return audioDAO.getAudios();
+        try {
+            return audioDAO.getAudios();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public List<Audio> getAudiosByAlbum(int albumId) {
-        return audioDAO.getAudiosByAlbum(albumId);
+        try {
+            return audioDAO.getAudiosByAlbum(albumId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public void deleteAudio(int audioId) {
-        System.out.println(audioId);
-        audioDAO.deleteAudio(audioId);
+        try {
+            audioDAO.deleteAudio(audioId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -40,13 +54,21 @@ public class AudioService implements IAudioService {
         if(artistId == 0  ){
             throw new ServiceException("incorrect artist");
         }
-
-        audioDAO.addAudio(title,price,discount,imageUrl,albumId,artistId);
+        try {
+            audioDAO.addAudio(title,price,discount,imageUrl,albumId,artistId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Audio getAudioById(int audioId) {
-        return audioDAO.getAudioById(audioId);
+        try {
+            return audioDAO.getAudioById(audioId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

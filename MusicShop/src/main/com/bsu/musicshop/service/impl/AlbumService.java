@@ -3,6 +3,7 @@ package main.com.bsu.musicshop.service.impl;
 import main.com.bsu.musicshop.dao.IAlbumDAO;
 import main.com.bsu.musicshop.dao.daoimpl.AlbumDAO;
 import main.com.bsu.musicshop.entity.Album;
+import main.com.bsu.musicshop.exception.DAOException;
 import main.com.bsu.musicshop.service.IAlbumService;
 
 import java.util.List;
@@ -13,12 +14,22 @@ public class AlbumService implements IAlbumService {
 
     @Override
     public List<Album> getAlbums() {
-        return albumDAO.getAlbums();
+        try {
+            return albumDAO.getAlbums();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public Album getAlbumById(int albumId) {
-        return albumDAO.getAlbumById(albumId);
+        try {
+            return albumDAO.getAlbumById(albumId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -31,12 +42,21 @@ public class AlbumService implements IAlbumService {
         if(imageUrl.isEmpty()){
             imageUrl = "default-cover.png";
         }
-        albumDAO.addAlbum(title, imageUrl, artistId);
+        try {
+            albumDAO.addAlbum(title, imageUrl, artistId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteAlbum(int albumId) {
-        albumDAO.deleteAlbum(albumId);
+
+        try {
+            albumDAO.deleteAlbum(albumId);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

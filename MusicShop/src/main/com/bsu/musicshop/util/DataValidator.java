@@ -1,8 +1,8 @@
 package main.com.bsu.musicshop.util;
 
 public class DataValidator {
-    private static final String LOGIN_REGEX= "^\\p{L}(\\p{L}|\\p{N}|[_])*$";
-    private static final String PASSWORD_REGEX = "^.*(?=.{6,})(?=.*(\\p{Ll})+)(?=.*(\\p{Lu})+)(?=.*(\\p{N})+).*$";
+    private static final String LOGIN_REGEX= "^[a-zA-Z0-9]{2,14}";
+    private static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{4,}$";
 
     private DataValidator() {
     }

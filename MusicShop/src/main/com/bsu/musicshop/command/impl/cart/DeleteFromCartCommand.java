@@ -9,16 +9,30 @@ import main.com.bsu.musicshop.util.Attributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Set;
 
 public class DeleteFromCartCommand extends AbstractCommand {
 
-    ICartService cartService = new CartService();
+    private ICartService cartService = new CartService();
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+
         int audioId = Integer.parseInt(request.getParameter("audio-delete-id"));
-        ((List<Audio>)request.getSession().getAttribute(Attributes.CART_LIST)).removeIf(audio -> audio.getId()==audioId);
+
+        Set<Audio> cartList = ((Set<Audio>) request.getSession().getAttribute(Attributes.CART_LIST));
+        double totalPrice = 0;
+        if (request.getSession().getAttribute(Attributes.TOTAL_PRICE) != null) {
+            totalPrice = (double) request.getSession().getAttribute(Attributes.TOTAL_PRICE);
+        }
+        for (Audio aud : cartList) {
+            if (aud.getId() == audioId) {
+                totalPrice -= aud.getPrice() * (1 - aud.getDiscount() / 100);
+            }
+        }
+        cartList.removeIf(audio -> audio.getId() == audioId);
+        request.getSession().setAttribute(Attributes.TOTAL_PRICE, totalPrice);
+
         return Pages.CART;
     }
 }

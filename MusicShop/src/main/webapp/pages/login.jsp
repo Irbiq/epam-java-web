@@ -1,14 +1,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page isELIgnored="false" errorPage="error.jsp" language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- Bootstrap core CSS -->
@@ -23,8 +20,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
-
-
     <link href="/css/forms.css" rel="stylesheet">
     <link href="/css/index.css" rel="stylesheet">
 </head>

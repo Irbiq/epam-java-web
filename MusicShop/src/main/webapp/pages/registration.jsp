@@ -1,5 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="error.jsp" isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <html>
@@ -18,7 +18,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
             integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
             crossorigin="anonymous"></script>
-
 
     <link href="/css/index.css" rel="stylesheet">
     <link href="/css/forms.css" rel="stylesheet">
@@ -49,12 +48,12 @@
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="page.login"/></label>
-                                <input type="text" class="form-control" name="user-login" id="user-login-id"
+                                <input type="text" pattern="^[a-zA-Z0-9]{2,14}" class="form-control" name="user-login" id="user-login-id"
                                        placeholder="User Name" required="required">
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="page.password"/></label>
-                                <input type="password" class="form-control" name="user-password" id="user-password-id"
+                                <input type="password" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$" class="form-control" name="user-password" id="user-password-id"
                                        placeholder="Password" required="required">
                             </div>
                             <%--<div class="form-group">

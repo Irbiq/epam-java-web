@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page isELIgnored="false" contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page errorPage="error.jsp"%>
+<%@ page isELIgnored="false" errorPage="error.jsp" contentType="text/html;charset=UTF-8" language="java" %>
 <fmt:setLocale value="${locale}" scope="session"/>
 <fmt:setBundle basename="properties.content"/>
 <html>
@@ -58,10 +57,17 @@
             <c:forEach items="${audios}" var="audio" varStatus="index">
                 <tr>
                     <th>${index.index+1}</th>
-                    <td>${audio.artist}</td>
+                    <td>${album.artist}</td>
                     <td>${audio.title}</td>
                     <td>
-                        <button class="btn btn-primary">${audio.price}</button>
+                        <div>
+                            <form name="price-form"
+                                  action="/controller?command=add_to_cart_from_album" method="post">
+                                <input name="audio-buy" type="hidden" value="${audio.id}">
+                                <input name="album-id" type="hidden" value="${album.id}">
+                                <button class="btn btn-link" type="submit">${audio.price}$</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             </c:forEach>
@@ -70,24 +76,28 @@
     </div>
 
     <div style="background: rgba(25,21,8,0.7);margin-left: 1em ; padding-top: 2%">
-        <h4 style="color: rgb(247, 255, 251); border-bottom: solid  rgb(247, 255, 251);"><fmt:message key="page.comments"/></h4>
-        <div class="row" style="margin: 0%">
-            <form class="form-inline" method="post" action="/controller?command=add_comment">
-                <div  style="padding: 0%; border-bottom: solid #007bff;">
-                    <textarea name="comment-text" id="textarea"
-                              style="border-bottom: solid rgba(22,25,23,0.7) ; height: 35px; color: rgb(247, 255, 251); background-color: #222222; border: none;"
-                              class="style-scope iron-autogrow-textarea" cols="100" autocomplete="off" required=""
-                              maxlength="10000"></textarea>
-                    <input type="hidden" name="comment-album-id" value="${album.id}"/>
-                </div>
-                <div >
-                    <button class="btn btn-primary" type="submit" style="height: 35px; width: 60px"><fmt:message key="page.send"/></button>
-                </div>
-            </form>
-        </div>
+        <h4 style="color: rgb(247, 255, 251); border-bottom: solid  rgb(247, 255, 251);"><fmt:message
+                key="page.comments"/></h4>
+        <c:if test="${user != null}">
+            <div class="row" style="margin: 0%">
+                <form class="form-inline" method="post" action="/controller?command=add_comment">
+                    <div style="padding: 0%; border-bottom: solid #007bff;">
+               <textarea name="comment-text" id="textarea"
+                         style="border-bottom: solid rgba(22,25,23,0.7) ; height: 35px; color: rgb(247, 255, 251); background-color: #222222; border: none;"
+                         class="style-scope iron-autogrow-textarea" cols="100" autocomplete="off"
+                         maxlength="10000"></textarea>
+                        <input type="hidden" name="comment-album-id" value="${album.id}"/>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit" style="height: 35px; width: 60px"><fmt:message
+                                key="page.send"/></button>
+                    </div>
+                    s
+                </form>
+            </div>
+        </c:if>
         <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
-            <c:set scope="page" var="i" value="1"/>
-            <c:forEach var="comment" items="${comments_to_album}"  varStatus="status">
+            <c:forEach items="${comments_to_album}" var="comment" varStatus="st">
                 <li style="margin-top: 1%">
                     <div class="row" style="margin: 0%">
                         <strong style="color: rgb(247, 255, 251);">${comment.user}</strong>

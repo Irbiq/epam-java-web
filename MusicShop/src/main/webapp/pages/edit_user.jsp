@@ -36,26 +36,21 @@
             <div class="container " style=" margin-bottom: 10%;">
                 <div class="panel panel-success" style="max-width: 35%;" align="left">
                     <div class="panel-body">
-                        <form name="loginForm" action="/controller?command=registration" method="post">
+                        <form name="loginForm" action="/controller?command=edit_user_confirm" method="post">
                             <div class="form-group">
                                 <label><fmt:message key="page.name"/></label>
                                 <input type="text" class="form-control" name="user-name" id="user-name-id"
-                                       placeholder="User Name" value="${ed}" required="required">
+                                       placeholder="User Name" value="${edited_user.name}" required="required">
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="page.surname"/></label>
                                 <input type="text" class="form-control" name="user-surname" id="user-surname-id"
-                                       placeholder="User Name" required="required">
+                                       placeholder="User Name" value="${edited_user.surname}" required="required">
                             </div>
                             <div class="form-group">
                                 <label><fmt:message key="page.login"/></label>
                                 <input type="text" class="form-control" name="user-login" id="user-login-id"
-                                       placeholder="User Name" required="required">
-                            </div>
-                            <div class="form-group">
-                                <label><fmt:message key="page.password"/></label>
-                                <input type="password" class="form-control" name="user-password" id="user-password-id"
-                                       placeholder="Password" required="required">
+                                       placeholder="User Name" value="${edited_user.login}" pattern="^[a-zA-Z0-9]{2,14}" required="required">
                             </div>
                             <div class="form-group">
                                 <label>Role</label>
@@ -66,8 +61,6 @@
                             </div>
                             <button type="submit" style="width: 100%;"
                                     class="btn btn-large btn-primary btn-lg btn-block"><b><fmt:message key="page.edit"/></b></button>
-                            <button type="reset" style="width: 100%;"
-                                    class="btn btn-large btn-primary btn-lg btn-block"><b><fmt:message key="page.cancel"/></b></button>
                         </form>
                     </div>
                 </div>

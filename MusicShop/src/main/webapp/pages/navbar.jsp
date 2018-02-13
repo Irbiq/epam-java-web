@@ -17,11 +17,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="/pages/albums.jsp"><fmt:message key="page.albums"/></a>
             </li>
-            <%--<c:if test="${user.role == \"ADMIN\" }">--%>
+            <c:if test="${user.role == \"ADMIN\" }">
             <li class="nav-item">
                 <a class="nav-link" href="/pages/admin/users.jsp"><fmt:message key="page.users"/></a>
             </li>
-            <%--</c:if>--%>
+            </c:if>
         </ul>
         <form class="form-inline">
             <ul class="nav navbar-nav navbar-right  my-2 my-lg-0">

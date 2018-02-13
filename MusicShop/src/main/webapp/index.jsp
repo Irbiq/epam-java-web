@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page errorPage="pages/error.jsp" language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -82,12 +82,11 @@
                                     </div>
                                     <div class="card-block" style="margin-top: 5px ; text-align: right">
                                         <div>
-                                            <form id="audio-to-cart" name="price-form" action="/controller?command=add_to_cart" method="post">
-                                                <span style="text-align: right; margin-right: 10px"><%--
-                                                    <a href="#" class="card-link">${audio.price} $</a>--%>
-                                                    <input name="audio-buy-id" type="hidden" value="${audio.id}">
-                                                </span>
-                                                <button class="btn btn-link" type="submit" form="audio-to-cart">${audio.price} $</button>
+                                            <form  name="price-form"
+                                                  action="/controller?command=add_to_cart" method="post">
+                                                <input name="audio-buy" type="hidden" value="${audio.id}">
+                                                <button class="btn btn-link" type="submit">${audio.price}$
+                                                </button>
                                             </form>
                                         </div>
                                     </div>
@@ -148,7 +147,7 @@
                                                   action="/controller?command=get_album&id=${album.id}" method="post">
                                                 <span style="text-align: right; margin-right: 10px"> <a
                                                         href="/controller?command=get_album&id=${album.id}"
-                                                        class="card-link">To Album</a></span>
+                                                        class="card-link"><fmt:message key="page.open"/></a></span>
                                             </form>
                                         </div>
                                     </div>

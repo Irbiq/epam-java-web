@@ -3,6 +3,7 @@ package main.com.bsu.musicshop.dao.daoimpl;
 import main.com.bsu.musicshop.dao.IAlbumDAO;
 import main.com.bsu.musicshop.dbmanager.ConnectionPool;
 import main.com.bsu.musicshop.entity.Album;
+import main.com.bsu.musicshop.exception.DAOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class AlbumDAO implements IAlbumDAO {
     private static final String DELETE_ALBUM = "DELETE FROM album WHERE idalbum=?";
 
     @Override
-    public void addAlbum(String title, String imageUrl, int artistId) {
+    public void addAlbum(String title, String imageUrl, int artistId) throws DAOException {
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
             PreparedStatement ps = connection.prepareStatement(INSERT_ALBUM);
             ps.setString(1, title);
@@ -38,24 +39,26 @@ public class AlbumDAO implements IAlbumDAO {
             ps.setInt(3, artistId);
             int result = ps.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to add albums : " + e);
+            throw new DAOException("Error. Impossible to add album : " + e,e);
         }
     }
 
     @Override
-    public void deleteAlbum(int albumId) {
+    public void deleteAlbum(int albumId) throws DAOException {
         Album album = null;
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
             PreparedStatement ps = connection.prepareStatement(DELETE_ALBUM);
             ps.setInt(1, albumId);
             int result = ps.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to delete album : " + e);
+            throw new DAOException("Error. Impossible to delete album : " + e,e);
         }
     }
 
     @Override
-    public Album getAlbumById(int id) {
+    public Album getAlbumById(int id) throws DAOException {
         Album album = null;
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
             PreparedStatement ps = connection.prepareStatement(SELECT_ALBUM_BY_ID);
@@ -69,13 +72,14 @@ public class AlbumDAO implements IAlbumDAO {
                 album.setArtist(rs.getString(4));
             }
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to load album : " + e);
+            throw new DAOException("Error. Impossible to load album : " + e,e);
         }
         return album;
     }
 
     @Override
-    public List<Album> getAlbums() {
+    public List<Album> getAlbums() throws DAOException {
         List<Album> albums = null;
         try (Connection connection = ConnectionPool.getInstance().getConnection()) {
 
@@ -94,6 +98,7 @@ public class AlbumDAO implements IAlbumDAO {
             }
         } catch (SQLException e) {
             logger.error("Error. Impossible to load albums : " + e);
+            throw new DAOException("Error. Impossible to load albums : " + e,e);
         }
         return albums;
     }

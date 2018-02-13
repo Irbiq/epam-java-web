@@ -46,10 +46,10 @@ public class CommentDAO implements ICommentDAO {
                 comment.setAlbumId(rs.getInt(3));
                 comment.setUser(rs.getString(4));
                 comments.add(comment);
-                return comments;
             }
+            return comments;
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to load comments to album : " + e);
         }
         return comments;
     }
@@ -63,7 +63,7 @@ public class CommentDAO implements ICommentDAO {
             ps.setInt(3, albumId);
             return ps.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to add comment : " + e);
         }
         return ZERO_COMMENTS_ADDED;
     }
@@ -75,7 +75,7 @@ public class CommentDAO implements ICommentDAO {
             ps.setInt(1, commentId);
             ps.executeUpdate();
         } catch (SQLException e) {
-            logger.error("Error. Impossible to load albums : " + e);
+            logger.error("Error. Impossible to delete comment : " + e);
         }
     }
 

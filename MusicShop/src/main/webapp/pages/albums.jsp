@@ -28,16 +28,16 @@
 </head>
 <body style="background-color: #222222">
 <jsp:include page="navbar.jsp"/>
-
 <div class="container-fluid text-center" style="width: 80%">
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAlbum" data-whatever="@mdo">
-        <fmt:message key="page.add_album"/>
-    </button>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteAlbum" data-whatever="@fat">
-        <fmt:message key="page.delete"/>
-    </button>
-
+    <c:if test="${user.role == \"ADMIN\" }">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAlbum" data-whatever="@mdo">
+            <fmt:message key="page.add_album"/>
+        </button>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#deleteAlbum"
+                data-whatever="@fat">
+            <fmt:message key="page.delete"/>
+        </button>
+    </c:if>
 
     <ul class="list-group" style="list-style-type: none ; margin-top: 5px">
         <c:set scope="page" var="i" value="0"/>
@@ -59,7 +59,7 @@
                                             <%--<form name="price-form" action="/controller?command=register" method="post">--%>
                                         <span style="text-align: right; margin-right: 10px"> <a
                                                 href="/controller?command=get_album&id=${album.id}"
-                                                class="card-link">${album.id}</a></span>
+                                                class="card-link"><fmt:message key="page.open"/></a></span>
                                             <%--</form>--%>
                                     </div>
                                 </div>
@@ -88,7 +88,8 @@
                 <form id="add-album-form-id" action="/controller?command=add_album" method="post">
                     <div class="form-group">
                         <label for="album-title-id" class="form-control-label"><fmt:message key="page.title"/></label>
-                        <input type="text" name="album-title" class="form-control" id="album-title-id">
+                        <input type="text" required="required" name="album-title" class="form-control"
+                               id="album-title-id">
                     </div>
                     <div class="form-group">
                         <label for="album-image-id" class="form-control-label">Image url</label>
@@ -162,7 +163,7 @@
     $('#add-album-btn-id').click(function () {
         console.log("CLICKED");
         $('#addAlbum').modal('hide');
-        if ($("#album-title-id") != null || $("#album-title-id") != "" ) {
+        if ($("#album-title-id") != null || $("#album-title-id") != "") {
             $("#add-album-form-id")[0].submit();
         }
         $("#add-album-form-id")[0].reset();

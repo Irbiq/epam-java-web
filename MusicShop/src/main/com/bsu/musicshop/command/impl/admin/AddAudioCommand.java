@@ -17,15 +17,16 @@ public class AddAudioCommand extends AbstractCommand {
     public String execute(HttpServletRequest request, HttpServletResponse response) {
 
 
-       String title = request.getParameter("audio-title");
-       int artistId = Integer.parseInt(request.getParameter("audio-artist"));
-       double price = Double.parseDouble(request.getParameter("audio-price"));
-       int discount = Integer.parseInt(request.getParameter("audio-discount"));
-       String imageUrl = request.getParameter("audio-image");
+        String title = request.getParameter("audio-title");
+        int artistId = Integer.parseInt(request.getParameter("audio-artist"));
+        double price = Double.parseDouble(request.getParameter("audio-price"));
+        int discount = Integer.parseInt(request.getParameter("audio-discount"));
+        String imageUrl = request.getParameter("audio-image");
+
         try {
-            audioService.addAudio(title,price,discount,imageUrl,0,artistId);
+            audioService.addAudio(title, price, discount, imageUrl, 0, artistId);
         } catch (ServiceException e) {
-            e.printStackTrace();
+
         }
 
 

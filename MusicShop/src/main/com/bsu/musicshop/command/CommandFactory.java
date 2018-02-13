@@ -5,6 +5,7 @@ package main.com.bsu.musicshop.command;
 import main.com.bsu.musicshop.command.impl.*;
 import main.com.bsu.musicshop.command.impl.admin.*;
 import main.com.bsu.musicshop.command.impl.cart.AddToCartCommand;
+import main.com.bsu.musicshop.command.impl.cart.AddToCartFromAlbumCommand;
 import main.com.bsu.musicshop.command.impl.cart.DeleteFromCartCommand;
 
 public enum CommandFactory {
@@ -43,6 +44,11 @@ public enum CommandFactory {
             return new LocaleCommand();
         }
     },
+    ADD_TO_CART_FROM_ALBUM {
+        public AbstractCommand createCommand() {
+            return new AddToCartFromAlbumCommand();
+        }
+    },
     ADD_TO_CART {
         public AbstractCommand createCommand() {
             return new AddToCartCommand();
@@ -58,7 +64,7 @@ public enum CommandFactory {
             return new DeleteAudioCommand();
         }
     },
-    DELETE_USER {
+    USER_DELETE {
         public AbstractCommand createCommand() {
             return new DeleteUserCommand();
         }
@@ -81,6 +87,21 @@ public enum CommandFactory {
     DELETE_FROM_CART{
         public AbstractCommand createCommand() {
             return new DeleteFromCartCommand();
+        }
+    },
+    USER_EDIT{
+        public AbstractCommand createCommand() {
+            return new GetEditUserCommand();
+        }
+    },
+    BUY_ALL{
+        public AbstractCommand createCommand() {
+            return new BuyAllCommand();
+        }
+    },
+    EDIT_USER_CONFIRM{
+        public AbstractCommand createCommand() {
+            return new EditUserConfirmCommand();
         }
     };
 
